@@ -1,0 +1,15 @@
+[package]
+name = "Project"
+version = "1.0.0"
+authors = []
+
+[addresses]
+maintainer = "0xc6cd3c005d872010a5741f37ad7d483f1be77984f1c2875c93ff1505f1841474"
+[dev-addresses]
+
+[dependencies.SupraFramework]
+git = "https://github.com/Entropy-Foundation/aptos-core.git"
+rev = "dev"
+subdir = "aptos-move/framework/supra-framework"
+
+[dev-dependencies]

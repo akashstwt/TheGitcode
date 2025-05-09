@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  repos       Repo[]
+}
+
+model Repo {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  bounty      Float
+  companyId   Int
+  company     Company @relation(fields: [companyId], references: [id])
+  applications Application[]
+  winnerId    Int?
+}
+
+model Developer {
+  id             Int      @id @default(autoincrement())
+  name           String
+  walletAddress  String
+  githubUsername String
+  applications   Application[]   // Reverse relation added here
+}
+
+model Application {
+  id              Int       @id @default(autoincrement())
+  developerId     Int
+  repoId          Int
+  proposalDetails String
+
+  developer     Developer @relation(fields: [developerId], references: [id])
+  repo          Repo      @relation(fields: [repoId], references: [id])
+}
